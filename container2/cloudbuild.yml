@@ -21,7 +21,7 @@ steps:
     args:
       - "apply"
       - "-f"
-      - "deployment2.yml"
+      - "./container2/deployment2.yml"
     env:
       - "CLOUDSDK_COMPUTE_ZONE=us-central1-a"
       - "CLOUDSDK_CONTAINER_CLUSTER=kubernetes-assignment"
