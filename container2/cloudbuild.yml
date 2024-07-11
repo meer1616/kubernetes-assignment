@@ -5,7 +5,7 @@ steps:
         "build",
         "-t",
         "us-central1-docker.pkg.dev/proud-research-428901-i9/kub-assignment-repo/container2",
-        ".",
+        "/container1/.",
       ]
     id: Build
 
