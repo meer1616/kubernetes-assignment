@@ -1,0 +1,27 @@
+steps:
+  - name: "gcr.io/cloud-builders/docker"
+    args:
+      [
+        "build",
+        "-t",
+        "us-central1-docker.pkg.dev/proud-research-428901-i9/kub-assignment-repo/container1",
+        ".",
+      ]
+    id: Build
+
+  - name: "gcr.io/cloud-builders/docker"
+    args:
+      [
+        "push",
+        "us-central1-docker.pkg.dev/proud-research-428901-i9/kub-assignment-repo/container1",
+      ]
+    id: Push
+
+  - name: "gcr.io/cloud-builders/kubectl"
+    args:
+      - "apply"
+      - "-f"
+      - "deployment1.yml"
+    env:
+      - "CLOUDSDK_COMPUTE_ZONE=us-central1-a"
+      - "CLOUDSDK_CONTAINER_CLUSTER=kubernetes-assignment"

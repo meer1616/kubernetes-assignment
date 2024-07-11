@@ -1,0 +1,14 @@
+services:
+  container1:
+    build: ./container1
+    # image: meer2838/container1
+    ports:
+      - "8080:8080"
+    depends_on:
+      - container2
+
+  container2:
+    build: ./container2
+    # image: meer2838/container2
+    ports:
+      - "8081:8081"

@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: c1-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: container1
+  template:
+    metadata:
+      labels:
+        app: container1
+    spec:
+      containers:
+        - name: container1
+          image: us-central1-docker.pkg.dev/proud-research-428901-i9/kub-assignment-repo/container1
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+          volumeMounts:
+            - name: data-volume
+              mountPath: /app/MEER_PV_dir
+      volumes:
+        - name: data-volume
+          persistentVolumeClaim:
+            claimName: persistent-volume-claim
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: c1-service
+spec:
+  selector:
+    app: container1
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
+  type: LoadBalancer
